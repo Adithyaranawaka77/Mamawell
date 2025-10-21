@@ -20,7 +20,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
-      background:var(--bg); color:var(--text); line-height:1.6}
+      background:var(--bg); color:var(--text); line-height:1.65}
 .container{width:min(1100px,92%); margin:0 auto}
 .section{padding:88px 0}
 h1,h2,h3{margin:0 0 10px}
@@ -34,28 +34,88 @@ p.lead{color:var(--muted); margin-top:4px}
 @media (max-width: 900px){ .grid-2,.grid-3{grid-template-columns: 1fr}}
 
 /* ================= HEADER / NAV ================= */
-header{ position:fixed; inset:0 0 auto 0; z-index:1000;
+header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1000;
   background: color-mix(in oklab, var(--bg) 88%, transparent);
-  border-bottom:1px solid var(--border); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
 }
-.header-inner{ display:flex; align-items:center; justify-content:space-between; padding:12px 0 }
-.brand{ text-decoration:none; color:var(--text); font-weight:900; letter-spacing:.2px }
-.brand span{ background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent }
-nav{ display:flex; align-items:center; gap:10px; flex-wrap:wrap }
-nav a{ text-decoration:none; color:var(--text); padding:8px 10px; border-radius:10px }
-nav a:hover{ background: color-mix(in oklab, var(--card) 70%, transparent) }
-nav a.active{ outline:1px solid var(--border); background:var(--card) }
-.theme-toggle, .nav-toggle{
-  background:var(--card); border:1px solid var(--border); color:var(--text);
-  padding:6px 10px; border-radius:10px; cursor:pointer
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  flex-wrap: nowrap;
 }
-.nav-toggle{ display:none }
-@media (max-width:900px){
-  .nav-toggle{ display:inline-flex }
-  nav{ position: absolute; top:56px; left:4%; right:4%;
-       background:var(--surface); border:1px solid var(--border);
-       border-radius:14px; padding:12px; display:none; flex-direction:column; align-items:flex-start }
-  nav.open{ display:flex }
+.brand {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+.brand span {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* tighter spacing to keep one line */
+  flex-wrap: nowrap;
+  overflow-x: auto; /* avoid wrapping; allow scroll if needed */
+  scrollbar-width: none;
+}
+nav::-webkit-scrollbar { display: none; }
+nav a {
+  text-decoration: none;
+  color: var(--text);
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 15px;
+  white-space: nowrap;
+}
+nav a:hover {
+  background: color-mix(in oklab, var(--card) 70%, transparent);
+}
+nav a.active {
+  outline: 1px solid var(--border);
+  background: var(--card);
+}
+.theme-toggle,
+.nav-toggle {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.nav-toggle { display: none; }
+
+@media (max-width: 900px) {
+  .nav-toggle { display: inline-flex; }
+  nav {
+    position: absolute;
+    top: 56px;
+    left: 4%;
+    right: 4%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    overflow: visible;
+  }
+  nav.open { display: flex; }
 }
 
 /* ================= HERO ================= */
@@ -116,6 +176,11 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 /* ================= REVEAL ================= */
 .reveal{ opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease }
 .reveal.in{ opacity:1; transform: translateY(0) }
+
+/* ================= LONG-FORM TEXT ================= */
+.prose p { margin: 10px 0; }
+.prose ul { margin: 8px 0 0 18px; color: var(--muted); }
+.prose li { margin: 6px 0; }
 </style>
 </head>
 <body>
@@ -123,7 +188,7 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 <!-- ========== HEADER / NAV ========== -->
 <header>
   <div class="container header-inner">
-    <a href="#home" class="brand">Mama<span>Well</span></a>
+    <a href="#home" class="brand" title="MamaWell Home">Mama<span>Well</span></a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
     <nav id="nav">
       <a href="#home">Home</a>
@@ -148,7 +213,7 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 <section id="home" class="section container hero">
   <div class="hero-badge reveal in"><span class="badge">Project ID: R25-017</span> • AI for Maternal Wellness</div>
   <h1 class="reveal">MamaWell – AI-Driven Maternal Wellness System</h1>
-  <p class="lead reveal">An integrated research platform that analyzes medical reports, forecasts risks, and provides trimester-aware guidance for healthier pregnancies.</p>
+  <p class="lead reveal">A comprehensive platform that analyzes medical reports, forecasts risks, and delivers trimester-aware nutrition, exercise, and educational support to expectant mothers.</p>
   <div class="cta reveal">
     <a class="btn" href="#modules">Explore Modules</a>
     <a class="btn ghost" href="#contact">Request a Demo</a>
@@ -158,19 +223,10 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 <!-- ========== OVERVIEW ========== -->
 <section id="overview" class="section container">
   <h2 class="reveal">Project Overview</h2>
-  <div class="grid grid-3">
-    <article class="card reveal">
-      <h3>Goal</h3>
-      <p>Deliver personalized, technology-driven support for pregnant mothers by combining data-driven risk insights, nutrition, exercise, and a supportive assistant.</p>
-    </article>
-    <article class="card reveal">
-      <h3>Why Now</h3>
-      <p>Risk detection is often delayed and guidance is generic. MamaWell unifies clinical indicators with tailored recommendations to support timely decisions.</p>
-    </article>
-    <article class="card reveal">
-      <h3>Scope</h3>
-      <p>Focus on trimester-wise report analysis, risk forecasting (e.g., GDM, anemia), meal planning, exercise recommendations, and an AI assistant.</p>
-    </article>
+  <div class="prose reveal">
+    <p><strong>MamaWell</strong> is a research-driven system designed to enhance maternal care by unifying clinical indicators and lifestyle guidance into one coherent experience. We focus on practical needs during pregnancy—timely risk awareness, simple explanations of lab results, and safe, personalized recommendations that mothers can follow with confidence.</p>
+    <p>The platform supports trimester-wise interpretation of reports (e.g., BMI, blood pressure, hemoglobin, and glucose trends) and uses machine learning to predict risks such as gestational diabetes and anemia. In parallel, the system provides an assistant for common questions, generates nutritionally balanced meal plans, and recommends safe, trimester-aware exercise routines aligned to risk categories.</p>
+    <p>Our target outcome is improved decision-making for families and clinicians: fast, accessible insights; consistent self-tracking; and evidence-based guidance that respects local context and clinical best practices.</p>
   </div>
 </section>
 
@@ -178,9 +234,18 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 <section id="problem" class="section container">
   <h2 class="reveal">Problem & Scope</h2>
   <div class="grid grid-3">
-    <article class="card reveal"><h3>Challenges</h3><p>Delayed detection of risks; fragmented information across records; limited access to personalized guidance—especially beyond urban centers.</p></article>
-    <article class="card reveal"><h3>Gap</h3><p>Most apps offer general tips, not data-backed, trimester-specific insights tied to clinical measures like BMI, BP, Hb, or glucose trends.</p></article>
-    <article class="card reveal"><h3>Approach</h3><p>MamaWell analyzes uploaded reports, forecasts risk levels, and offers nutrition & exercise plans with a 24/7 support assistant.</p></article>
+    <article class="card reveal">
+      <h3>Current Challenges</h3>
+      <p>Many mothers receive risk information late or in a fragmented way. Paper records and scattered apps make it hard to track progress across trimesters, while generic tips often miss individual health profiles.</p>
+    </article>
+    <article class="card reveal">
+      <h3>Research Gap</h3>
+      <p>Existing solutions rarely combine clinical signals with personalized lifestyle recommendations. Few tools present trimester-specific insights grounded in measurable indicators like BMI bands, blood pressure, hemoglobin, or glucose levels.</p>
+    </article>
+    <article class="card reveal">
+      <h3>Our Scope</h3>
+      <p>MamaWell integrates report analysis, risk forecasting, nutrition planning, exercise recommendations, and a supportive assistant—designed for clarity, cultural relevance, and potential clinic adoption.</p>
+    </article>
   </div>
 </section>
 
@@ -188,11 +253,26 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 <section id="objectives" class="section container">
   <h2 class="reveal">Objectives</h2>
   <div class="grid grid-2">
-    <article class="card reveal"><h3>Main Objective</h3><p>Provide a comprehensive, personalized maternal-wellness experience through AI-assisted analysis and recommendations.</p></article>
-    <article class="card reveal"><h3>O1 – Report Analysis</h3><p>Automate trimester-wise extraction and interpretation of key biomarkers from medical reports.</p></article>
-    <article class="card reveal"><h3>O2 – Risk Forecasting</h3><p>Predict conditions such as gestational diabetes and anemia using robust ML ensembles.</p></article>
-    <article class="card reveal"><h3>O3 – Support Assist</h3><p>Offer an always-available assistant that answers common questions and supports record-keeping.</p></article>
-    <article class="card reveal"><h3>O4 – Lifestyle Guidance</h3><p>Generate personalized meal plans and safe, trimester-aware exercise recommendations.</p></article>
+    <article class="card reveal">
+      <h3>Main Objective</h3>
+      <p>Deliver a personalized, technology-assisted maternal wellness experience by turning raw clinical data into clear guidance and proactive risk alerts.</p>
+    </article>
+    <article class="card reveal">
+      <h3>O1 — Report Analysis</h3>
+      <p>Automate trimester-wise extraction and interpretation of clinical markers from uploaded reports, highlighting what changed and what requires attention.</p>
+    </article>
+    <article class="card reveal">
+      <h3>O2 — Risk Forecasting</h3>
+      <p>Forecast risks such as GDM and anemia using robust ML ensembles. Provide understandable risk levels and rationale to promote trust and action.</p>
+    </article>
+    <article class="card reveal">
+      <h3>O3 — Pregnancy Support Assist</h3>
+      <p>Offer an always-available assistant for common questions, self-tracking tips, and gentle reminders—reducing information overload for mothers.</p>
+    </article>
+    <article class="card reveal">
+      <h3>O4 — Lifestyle Guidance</h3>
+      <p>Generate trimester-appropriate meal plans and safe exercise recommendations aligned to the mother’s risk category and preferences.</p>
+    </article>
   </div>
 </section>
 
@@ -202,19 +282,43 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
   <div class="grid grid-2">
     <article class="card reveal">
       <h3>Data Pipeline</h3>
-      <ul>
-        <li>Collect → Clean → Split (trimester-wise records and supportive datasets)</li>
-        <li>Feature engineering (BMI bands, risk indicators) & normalization</li>
-        <li>Ethics: consent, anonymization, and secure handling</li>
-      </ul>
+      <div class="prose">
+        <ul>
+          <li><strong>Collection:</strong> trimester-wise records and supportive datasets (e.g., nutritional tables) with consent and governance.</li>
+          <li><strong>Preprocessing:</strong> cleaning, normalization, feature engineering (BMI banding, risk flags, rolling trends), and splits.</li>
+          <li><strong>Privacy & Ethics:</strong> de-identification, minimal data retention, and clear purpose limitations.</li>
+        </ul>
+      </div>
     </article>
     <article class="card reveal">
       <h3>Modeling & Evaluation</h3>
-      <ul>
-        <li>Baseline models → boosted ensembles (e.g., gradient boosting)</li>
-        <li>Cross-validation; metrics such as F1 and ROC-AUC</li>
-        <li>Error analysis and bias checks; iterative refinement</li>
-      </ul>
+      <div class="prose">
+        <ul>
+          <li><strong>Baselines → Ensembles:</strong> start with interpretable baselines, evolve to gradient-boosted ensembles.</li>
+          <li><strong>Validation:</strong> cross-validation with metrics such as F1 and ROC-AUC; calibration checks and error analysis.</li>
+          <li><strong>Reliability:</strong> threshold tuning for actionable alerts; human-in-the-loop review for sensitive outputs.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="card reveal">
+      <h3>System Design</h3>
+      <div class="prose">
+        <ul>
+          <li><strong>Architecture:</strong> modular components for analysis, forecasting, assistant, nutrition, and exercise.</li>
+          <li><strong>Interfaces:</strong> web dashboard for summaries and education; API surface for future mobile or clinic integration.</li>
+          <li><strong>Monitoring:</strong> basic telemetry for model drift and user experience (privacy-preserving).</li>
+        </ul>
+      </div>
+    </article>
+    <article class="card reveal">
+      <h3>Safety & Limitations</h3>
+      <div class="prose">
+        <ul>
+          <li><strong>Not diagnostic:</strong> the system supports—not replaces—clinical judgment.</li>
+          <li><strong>Bias checks:</strong> analyses for fairness across age, parity, and other relevant cohorts.</li>
+          <li><strong>Clear messaging:</strong> guidance uses plain language with “when to seek care” prompts.</li>
+        </ul>
+      </div>
     </article>
   </div>
 </section>
@@ -223,12 +327,30 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 <section id="modules" class="section container">
   <h2 class="reveal">System Modules</h2>
   <div class="grid grid-3">
-    <article class="card reveal"><h3>Pregnancy Risk Forecasting</h3><p>Integrates patient records (BMI, BP, Hb, glucose trends) to flag elevated risk levels early.</p></article>
-    <article class="card reveal"><h3>Pregnancy Support Assist</h3><p>AI assistant (text/voice ready) for FAQs, education, and guided self-tracking.</p></article>
-    <article class="card reveal"><h3>Personalized Meal Planning</h3><p>Trimester-specific plans aligned to risk category, preferences, and nutritional goals.</p></article>
-    <article class="card reveal"><h3>Risk-Aware Exercise</h3><p>Safe, trimester-aware exercise suggestions tailored to health indicators.</p></article>
-    <article class="card reveal"><h3>Dashboard & Alerts</h3><p>Longitudinal visualization, progress insights, and proactive notifications.</p></article>
-    <article class="card reveal"><h3>Integration</h3><p>Modular architecture for mobile/clinic interfaces and future clinical validation.</p></article>
+    <article class="card reveal">
+      <h3>Pregnancy Risk Forecasting</h3>
+      <p>Integrates clinical records—BMI, BP, hemoglobin, glucose—to forecast risk levels and explain the drivers behind each alert.</p>
+    </article>
+    <article class="card reveal">
+      <h3>Pregnancy Support Assist</h3>
+      <p>Answers FAQs, shares trimester-specific guidance, and helps mothers understand what their results mean in day-to-day language.</p>
+    </article>
+    <article class="card reveal">
+      <h3>Personalized Meal Planning</h3>
+      <p>Builds safe, balanced meal plans for each trimester with options to reflect diet preferences and risk category.</p>
+    </article>
+    <article class="card reveal">
+      <h3>Risk-Aware Exercise</h3>
+      <p>Recommends safe activity levels and simple routines, with cautions and “stop” signs when risk indicators are elevated.</p>
+    </article>
+    <article class="card reveal">
+      <h3>Dashboard & Alerts</h3>
+      <p>Visualizes progress, highlights changes since the last visit, and sends gentle reminders for checkups and self-care.</p>
+    </article>
+    <article class="card reveal">
+      <h3>Integration & Future Work</h3>
+      <p>Designed for clinic pilots, localized datasets, and stronger validation in partnership with healthcare professionals.</p>
+    </article>
   </div>
 </section>
 
@@ -248,6 +370,9 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 <!-- ========== TEAM ========== -->
 <section id="team" class="section container">
   <h2 class="reveal">Team & Supervisors</h2>
+  <div class="prose reveal">
+    <p>Our multidisciplinary team blends data, UX, and domain input to keep MamaWell both practical and clinically respectful. Supervisory guidance ensures rigor in method and ethics.</p>
+  </div>
   <div class="grid grid-3">
     <article class="card reveal"><h3>Ms. Uthpala Samarakoon</h3><p class="muted">Supervisor • SLIIT</p></article>
     <article class="card reveal"><h3>Ms. Wishalya Tissera</h3><p class="muted">Co-Supervisor • SLIIT</p></article>
@@ -262,6 +387,9 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 <!-- ========== PUBLICATIONS ========== -->
 <section id="publications" class="section container">
   <h2 class="reveal">Publications</h2>
+  <div class="prose reveal">
+    <p>Early results and design insights have been prepared for dissemination. We aim to contribute datasets, evaluation protocols, and deployment learnings to the maternal-health research community.</p>
+  </div>
   <table class="table reveal">
     <thead><tr><th>Year</th><th>Title</th><th>Venue</th></tr></thead>
     <tbody>
@@ -274,8 +402,16 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 <section id="downloads" class="section container">
   <h2 class="reveal">Downloads</h2>
   <div class="grid grid-2">
-    <article class="card reveal"><h3>Project Report</h3><p>Full academic write-up (PDF).</p><a class="btn" href="#">Download</a></article>
-    <article class="card reveal"><h3>Slides</h3><p>Final presentation deck (PPT/PDF).</p><a class="btn" href="#">Download</a></article>
+    <article class="card reveal">
+      <h3>Project Report</h3>
+      <p>Full academic write-up (PDF), including method details, validations, and appendices.</p>
+      <a class="btn" href="#" download>Download</a>
+    </article>
+    <article class="card reveal">
+      <h3>Slides</h3>
+      <p>Final presentation deck (PPT/PDF) used for reviews and demos.</p>
+      <a class="btn" href="#" download>Download</a>
+    </article>
   </div>
 </section>
 
@@ -285,7 +421,7 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
   <div class="grid grid-2">
     <article class="card reveal">
       <h3>Get in Touch</h3>
-      <p class="muted">For collaborations, pilots, or academic feedback, send us a message. We’ll reply shortly.</p>
+      <p class="muted">For collaborations, pilots, or feedback, send us a message. We’ll reply soon.</p>
       <form id="contactForm" action="YOUR_FORMSPREE_ENDPOINT_HERE" method="POST" novalidate>
         <div style="display:grid;gap:10px;margin-top:10px">
           <input name="name" type="text" placeholder="Your name" required
