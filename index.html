@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>MamaWell – AI-Driven Maternal Wellness System</title>
+<link rel="icon" href="favicon.ico" />
+
+<style>
+/* ============ THEME ============ */
+:root{
+  --bg:#0b0c10; --surface:#12131a; --card:#161825; --text:#e6e6e6; --muted:#a8a8b3;
+  --accent:#5eead4; --accent2:#a78bfa; --border:#242734; --glow:0 0 0 rgba(0,0,0,0);
+  --shadow: 0 10px 30px rgba(0,0,0,.28);
+  --grad: linear-gradient(135deg, var(--accent), var(--accent2));
+}
+:root[data-theme="light"]{
+  --bg:#f7f9fb; --surface:#ffffff; --card:#ffffff; --text:#0f172a; --muted:#475569;
+  --border:#e6e8ef; --shadow: 0 12px 22px rgba(20,20,40,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
+      background:var(--bg); color:var(--text); line-height:1.6}
+
+/* ============ LAYOUT ============ */
+.container{width:min(1100px,92%); margin:0 auto}
+.section{padding:88px 0}
+h1,h2,h3{margin:0 0 10px}
+h1{font-size:clamp(28px,4vw,48px)}
+h2{font-size:clamp(22px,3vw,32px)}
+h3{font-size:clamp(18px,2.2vw,22px)}
+p.lead{color:var(--muted); margin-top:4px}
+.grid{display:grid; gap:24px}
+.grid-2{grid-template-columns: repeat(2, minmax(0,1fr))}
+.grid-3{grid-template-columns: repeat(3, minmax(0,1fr))}
+@media (max-width: 900px){ .grid-2,.grid-3{grid-template-columns: 1fr}}
+
+/* ============ HEADER/NAV ============ */
+header{ position:fixed; inset:0 0 auto 0; z-index:1000;
+  background: color-mix(in oklab, var(--bg) 88%, transparent);
+  border-bottom:1px solid var(--border); backdrop-filter: blur(8px);
+}
+.header-inner{ display:flex; align-items:center; justify-content:space-between; padding:12px 0 }
+.brand{ text-decoration:none; color:var(--text); font-weight:900; letter-spacing:.2px }
+.brand span{ background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent }
+nav{ display:flex; align-items:center; gap:10px; flex-wrap:wrap }
+nav a{ text-decoration:none; color:var(--text); padding:8px 10px; border-radius:10px }
+nav a:hover{ background: color-mix(in oklab, var(--card) 70%, transparent) }
+nav a.active{ outline:1px solid var(--border); background:var(--card) }
+.theme-toggle, .nav-toggle{
+  background:var(--card); border:1px solid var(--border); color:var(--text);
+  padding:6px 10px; border-radius:10px; cursor:pointer
+}
+.nav-toggle{ display:none }
+@media (max-width:900px){
+  .nav-toggle{ display:inline-flex }
+  nav{ position: absolute; top:56px; left:4%; right:4%;
+       background:var(--surface); border:1px solid var(--border);
+       border-radius:14px; padding:12px; display:none; flex-direction:column; align-items:flex-start }
+  nav.open{ display:flex }
+}
+
+/* ============ HERO ============ */
+.hero{ padding-top:120px; text-align:center }
+.hero-badge{display:inline-flex; gap:8px; align-items:center; font-size:14px; padding:6px 10px;
+  border:1px solid var(--border); border-radius:999px; background: color-mix(in oklab, var(--surface) 92%, transparent)}
+.hero .cta{ margin-top:16px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap }
+.btn{ display:inline-block; text-decoration:none; background:var(--grad); color:#fff;
+  padding:10px 14px; border-radius:12px; font-weight:700; box-shadow: 0 8px 18px rgba(95, 142, 240, .18) }
+.btn.ghost{ background:transparent; color:var(--text); border:1px solid var(--border) }
+
+/* ============ CARDS ============ */
+.card{
+  background: radial-gradient(1200px 200px at 0% 0%, color-mix(in oklab, var(--accent) 14%, transparent) 0, transparent 40%),
+              radial-gradient(1200px 200px at 100% 100%, color-mix(in oklab, var(--accent2) 12%, transparent) 0, transparent 40%),
+              var(--card);
+  border:1px solid var(--border); border-radius:16px; padding:18px 18px; box-shadow:var(--shadow);
+  transform: translateY(0); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease
+}
+.card:hover{ transform: translateY(-3px); box-shadow: 0 18px 36px rgba(0,0,0,.22);
+  border-color: color-mix(in oklab, var(--accent) 40%, var(--border)) }
+.card p{ color:var(--muted); margin:6px 0 0 }
+
+/* ============ TABLES ============ */
+.table{ width:100%; border-collapse:collapse; margin-top:14px }
+.table th, .table td{ border-bottom:1px solid var(--border); padding:10px; text-align:left }
+.table th{ color:var(--muted); font-weight:600 }
+
+/* ============ TIMELINE ============ */
+.timeline{ position:relative; padding-left:20px; }
+.timeline::before{ content:""; position:absolute; top:0; bottom:0; left:8px; width:4px;
+  background: color-mix(in oklab, var(--accent) 30%, var(--border)) }
+.milestone{ position:relative; padding:10px 10px 10px 22px; margin:6px 0; border-left:0 }
+.milestone::before{ content:""; position:absolute; left:-4px; top:14px; width:12px; height:12px; border-radius:50%;
+  background: var(--accent); outline: 2px solid color-mix(in oklab, var(--accent) 30%, transparent) }
+.milestone.done::before{ background: color-mix(in oklab, var(--accent) 60%, var(--accent2) 40%); }
+.milestone .status{ font-size:12px; padding:2px 8px; border:1px solid var(--border); border-radius:999px; color:var(--muted) }
+
+/* progress bar */
+.progress-wrap{ margin-top:14px; background: color-mix(in oklab, var(--border) 80%, transparent); border-radius:999px; overflow:hidden; height:10px }
+.progress{ height:10px; width:0%; background: var(--grad); transition: width .8s ease }
+
+/* ============ UTILITIES ============ */
+.muted{color:var(--muted)}
+.center{ text-align:center }
+.badge{ font-size:12px; display:inline-block; padding:3px 8px; border-radius:999px; border:1px solid var(--border) }
+
+/* ============ BACK TO TOP ============ */
+#toTop{
+  position: fixed; right:18px; bottom:18px; z-index:1000; display:none;
+  padding:10px 12px; border-radius:12px; background:var(--grad); color:#fff; border:0; cursor:pointer;
+  box-shadow: 0 12px 28px rgba(0,0,0,.25)
+}
+#toTop.show{ display:block }
+
+/* ============ REVEAL ANIM ============ */
+.reveal{ opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease }
+.reveal.in{ opacity:1; transform: translateY(0) }
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER / NAV ========== -->
+<header>
+  <div class="container header-inner">
+    <a href="#home" class="brand">Mama<span>Well</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+    <nav id="nav">
+      <a href="#home">Home</a>
+      <a href="#problem">Problem</a>
+      <a href="#objectives">Objectives</a>
+      <a href="#methodology">Methodology</a>
+      <a href="#modules">Modules</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#team">Team</a>
+      <a href="#publications">Publications</a>
+      <a href="#downloads">Downloads</a>
+      <a href="#contact">Contact</a>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle color theme">🌓</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ========== HERO ========== -->
+<section id="home" class="section container hero">
+  <div class="hero-badge reveal in"><span class="badge">Research</span> • AI for Maternal Wellness</div>
+  <h1 class="reveal">MamaWell – AI-Driven Maternal Wellness System</h1>
+  <p class="lead reveal">Report analysis, risk forecasting, and supportive guidance for healthier pregnancies.</p>
+  <div class="cta reveal">
+    <a class="btn" href="#modules">Explore Modules</a>
+    <a class="btn ghost" href="#contact">Request a Demo</a>
+  </div>
+</section>
+
+<!-- ========== PROBLEM & SCOPE ========== -->
+<section id="problem" class="section container">
+  <h2 class="reveal">Problem & Scope</h2>
+  <div class="grid grid-3">
+    <article class="card reveal"><h3>Context</h3><p>Early identification of risks (e.g., GDM, anemia) is critical, yet mothers often lack proactive tools.</p></article>
+    <article class="card reveal"><h3>Gap</h3><p>Few integrated, locally validated solutions combine report analysis with personalized insights.</p></article>
+    <article class="card reveal"><h3>Solution</h3><p>MamaWell analyzes trimester-wise reports, predicts risk, and offers tailored guidance with an assistant.</p></article>
+  </div>
+</section>
+
+<!-- ========== OBJECTIVES ========== -->
+<section id="objectives" class="section container">
+  <h2 class="reveal">Objectives</h2>
+  <div class="grid grid-2">
+    <article class="card reveal"><h3>O1</h3><p>Automate trimester-wise medical report analysis.</p></article>
+    <article class="card reveal"><h3>O2</h3><p>Predict gestational diabetes & anemia with ML ensembles.</p></article>
+    <article class="card reveal"><h3>O3</h3><p>Deploy a 24/7 pregnancy support assistant.</p></article>
+    <article class="card reveal"><h3>O4</h3><p>Provide a dashboard for longitudinal risk tracking.</p></article>
+  </div>
+</section>
+
+<!-- ========== METHODOLOGY ========== -->
+<section id="methodology" class="section container">
+  <h2 class="reveal">Methodology</h2>
+  <div class="grid grid-2">
+    <article class="card reveal">
+      <h3>Data Pipeline</h3>
+      <ul>
+        <li>Collection → Cleaning → Split</li>
+        <li>Feature Engineering & Normalization</li>
+        <li>Ethical handling (consent, anonymization)</li>
+      </ul>
+    </article>
+    <article class="card reveal">
+      <h3>Modeling & Evaluation</h3>
+      <ul>
+        <li>Baselines → Ensembles (e.g., GBM)</li>
+        <li>Cross-validation, F1/ROC-AUC</li>
+        <li>Error analysis & bias checks</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- ========== MODULES ========== -->
+<section id="modules" class="section container">
+  <h2 class="reveal">System Modules</h2>
+  <div class="grid grid-3">
+    <article class="card reveal"><h3>Medical Report Analyzer</h3><p>Extracts key biomarkers and trends by trimester.</p></article>
+    <article class="card reveal"><h3>Risk Prediction Engine</h3><p>Flags potential risks (GDM, anemia) early.</p></article>
+    <article class="card reveal"><h3>Support Assistant</h3><p>Answers questions and provides guidance 24/7.</p></article>
+    <article class="card reveal"><h3>Personalized Meal Plan</h3><p>Plans aligned to risk level and preferences.</p></article>
+    <article class="card reveal"><h3>Exercise Recommender</h3><p>Safe, trimester-aware routines and tips.</p></article>
+    <article class="card reveal"><h3>Dashboard & Alerts</h3><p>Visualize progress; receive proactive alerts.</p></article>
+  </div>
+</section>
+
+<!-- ========== TIMELINE ========== -->
+<section id="timeline" class="section container">
+  <h2 class="reveal">Project Timeline</h2>
+  <div class="timeline reveal" id="timelineList">
+    <div class="milestone done"><strong>Jul 2024</strong> — Proposal <span class="status">Done</span></div>
+    <div class="milestone done"><strong>Dec 2024</strong> — Progress I <span class="status">Done</span></div>
+    <div class="milestone done"><strong>Mar 2025</strong> — Progress II <span class="status">Done</span></div>
+    <div class="milestone"><strong>May 2025</strong> — Final Viva <span class="status">Upcoming</span></div>
+    <div class="milestone"><strong>Jun 2025</strong> — Final Report <span class="status">Upcoming</span></div>
+  </div>
+  <div class="progress-wrap reveal"><div class="progress" id="timelineProgress"></div></div>
+</section>
+
+<!-- ========== TEAM ========== -->
+<section id="team" class="section container">
+  <h2 class="reveal">Team</h2>
+  <div class="grid grid-3">
+    <article class="card reveal"><h3>Ms. Uthpala Samarakkon</h3><p class="muted">Supervisor • SLIIT</p></article>
+    <!-- <article class="card reveal"><h3>Dr. Jayantha Amarasinghe</h3><p class="muted">Co-Supervisor • SLIIT</p></article> -->
+    <article class="card reveal"><h3>Adithya Ranawaka</h3><p class="muted">Undergraduate Researcher • SLIIT</p></article>
+  </div>
+</section>
+
+<!-- ========== PUBLICATIONS ========== -->
+<section id="publications" class="section container">
+  <h2 class="reveal">Publications</h2>
+  <table class="table reveal">
+    <thead><tr><th>Year</th><th>Title</th><th>Venue</th></tr></thead>
+    <tbody>
+      <tr><td>2025</td><td>AI-Driven Pregnancy Health Monitoring</td><td> 2025 </td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========== DOWNLOADS ========== -->
+<section id="downloads" class="section container">
+  <h2 class="reveal">Downloads</h2>
+  <div class="grid grid-2">
+    <article class="card reveal"><h3>Final Report (PDF)</h3><p>Comprehensive documentation.</p><a class="btn" href="#">Download</a></article>
+    <article class="card reveal"><h3>Slides (PPT/PDF)</h3><p>Presentation deck.</p><a class="btn" href="#">Download</a></article>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section id="contact" class="section container">
+  <h2 class="reveal">Contact</h2>
+  <div class="grid grid-2">
+    <article class="card reveal">
+      <h3>Get in Touch</h3>
+      <p class="muted">We’d love to hear from you for collaborations, pilots, or feedback.</p>
+      <form id="contactForm" action="YOUR_FORMSPREE_ENDPOINT_HERE" method="POST" novalidate>
+        <div style="display:grid;gap:10px;margin-top:10px">
+          <input name="name" type="text" placeholder="Your name" required
+                 style="padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text)">
+          <input name="email" type="email" placeholder="Your email" required
+                 style="padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text)">
+          <textarea name="message" rows="5" placeholder="Your message" required
+                 style="padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text)"></textarea>
+          <!-- OPTIONAL: custom subject -->
+          <input type="hidden" name="_subject" value="MamaWell Website Contact" />
+          <!-- OPTIONAL: honeypot anti-bot -->
+          <input type="text" name="_honey" style="display:none">
+          <button class="btn" type="submit">Send Message</button>
+          <small class="muted" id="formNote">We’ll reply to your email soon.</small>
+        </div>
+      </form>
+      <p id="formStatus" style="margin-top:10px"></p>
+    </article>
+
+    <article class="card reveal">
+      <h3>Details</h3>
+      <p>Email: <a href="mailto:it21806872@my.sliit.lk">adithya@gmail.com</a></p>
+      <p>Faculty of Computing, SLIIT, Malabe, Sri Lanka.</p>
+      <p><span class="badge">Availability</span> Mon–Fri, 9:00–17:00 (IST)</p>
+    </article>
+  </div>
+</section>
+
+</main>
+
+<footer class="center" style="border-top:1px solid var(--border); padding:28px 0; color:var(--muted)">
+  © 2025 MamaWell – AI-Driven Maternal Wellness System
+</footer>
+
+<!-- Back to top -->
+<button id="toTop" aria-label="Back to top">↑</button>
+
+<script>
+/* ======= NAV: mobile toggle ======= */
+const nav = document.getElementById('nav');
+document.getElementById('navToggle')?.addEventListener('click',()=>nav.classList.toggle('open'));
+
+/* ======= THEME: toggle + persist ======= */
+const themeToggle = document.getElementById('themeToggle');
+const storedTheme = localStorage.getItem('theme');
+if(storedTheme) document.documentElement.dataset.theme = storedTheme;
+themeToggle?.addEventListener('click', ()=>{
+  const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+  document.documentElement.dataset.theme = next;
+  localStorage.setItem('theme', next);
+});
+
+/* ======= SMOOTH ANCHOR (native CSS handles, but collapse mobile menu) ======= */
+nav.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', ()=> nav.classList.remove('open'));
+});
+
+/* ======= SCROLL SPY (active section highlight) ======= */
+const links = [...nav.querySelectorAll('a[href^="#"]')];
+const map = new Map(links.map(a=>[document.querySelector(a.getAttribute('href')), a]));
+const spy = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    const link = map.get(e.target);
+    if(!link) return;
+    if(e.isIntersecting) {
+      links.forEach(l=>l.classList.remove('active'));
+      link.classList.add('active');
+    }
+  });
+}, { rootMargin: "-45% 0px -45% 0px", threshold: 0.01 });
+[...map.keys()].forEach(sec=>sec && spy.observe(sec));
+
+/* ======= SCROLL REVEAL ======= */
+const revealEls = document.querySelectorAll('.reveal');
+const revealer = new IntersectionObserver(es=>{
+  es.forEach(x=>{
+    if(x.isIntersecting){ x.target.classList.add('in'); revealer.unobserve(x.target); }
+  });
+},{threshold:.1});
+revealEls.forEach(el=>revealer.observe(el));
+
+/* ======= BACK TO TOP ======= */
+const toTop = document.getElementById('toTop');
+window.addEventListener('scroll', ()=>{
+  (window.scrollY > 600) ? toTop.classList.add('show') : toTop.classList.remove('show');
+});
+toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+/* ======= TIMELINE PROGRESS ======= */
+function updateTimelineProgress(){
+  const list = document.getElementById('timelineList');
+  const prog = document.getElementById('timelineProgress');
+  const items = [...list.querySelectorAll('.milestone')];
+  const total = items.length;
+  const completed = items.filter(it=>it.classList.contains('done')).length;
+  const pct = Math.round((completed/total)*100);
+  prog.style.width = pct + '%';
+}
+updateTimelineProgress();
+
+/* ======= CONTACT FORM (Formspree) ======= */
+const form = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+form?.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  formStatus.textContent = '';
+  const action = form.getAttribute('action');
+  if(!action || action.includes('YOUR_FORMSPREE_ENDPOINT_HERE')){
+    formStatus.style.color = 'tomato';
+    formStatus.textContent = '⚠️ Please set your Formspree endpoint in the form action URL.';
+    return;
+  }
+  const data = new FormData(form);
+  try{
+    const res = await fetch(action, { method:'POST', body:data, headers: { 'Accept':'application/json' }});
+    if(res.ok){
+      form.reset();
+      formStatus.style.color = 'limegreen';
+      formStatus.textContent = '✅ Thanks! Your message has been sent.';
+    } else {
+      const j = await res.json().catch(()=>({}));
+      throw new Error(j.errors?.map(e=>e.message).join(', ') || 'Submission failed');
+    }
+  }catch(err){
+    formStatus.style.color = 'tomato';
+    formStatus.textContent = '❌ ' + (err.message || 'Network error. Please try again.');
+  }
+});
+</script>
+
+</body>
+</html>
