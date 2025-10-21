@@ -3,27 +3,24 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>MamaWell – AI-Driven Maternal Wellness System</title>
+<title>MamaWell (R25-017) – AI-Driven Maternal Wellness System</title>
 <link rel="icon" href="favicon.ico" />
 
 <style>
-/* ============ THEME ============ */
+/* ================= THEME ================= */
 :root{
-  --bg:#0b0c10; --surface:#12131a; --card:#161825; --text:#e6e6e6; --muted:#a8a8b3;
-  --accent:#5eead4; --accent2:#a78bfa; --border:#242734; --glow:0 0 0 rgba(0,0,0,0);
-  --shadow: 0 10px 30px rgba(0,0,0,.28);
+  --bg:#0b0c10; --surface:#111320; --card:#161826; --text:#e6e6e6; --muted:#a8a8b3;
+  --accent:#5eead4; --accent2:#a78bfa; --border:#25293a; --shadow:0 10px 28px rgba(0,0,0,.28);
   --grad: linear-gradient(135deg, var(--accent), var(--accent2));
 }
 :root[data-theme="light"]{
   --bg:#f7f9fb; --surface:#ffffff; --card:#ffffff; --text:#0f172a; --muted:#475569;
-  --border:#e6e8ef; --shadow: 0 12px 22px rgba(20,20,40,.08);
+  --border:#e6e8ef; --shadow:0 12px 22px rgba(20,20,40,.08);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
       background:var(--bg); color:var(--text); line-height:1.6}
-
-/* ============ LAYOUT ============ */
 .container{width:min(1100px,92%); margin:0 auto}
 .section{padding:88px 0}
 h1,h2,h3{margin:0 0 10px}
@@ -36,7 +33,7 @@ p.lead{color:var(--muted); margin-top:4px}
 .grid-3{grid-template-columns: repeat(3, minmax(0,1fr))}
 @media (max-width: 900px){ .grid-2,.grid-3{grid-template-columns: 1fr}}
 
-/* ============ HEADER/NAV ============ */
+/* ================= HEADER / NAV ================= */
 header{ position:fixed; inset:0 0 auto 0; z-index:1000;
   background: color-mix(in oklab, var(--bg) 88%, transparent);
   border-bottom:1px solid var(--border); backdrop-filter: blur(8px);
@@ -61,16 +58,18 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
   nav.open{ display:flex }
 }
 
-/* ============ HERO ============ */
+/* ================= HERO ================= */
 .hero{ padding-top:120px; text-align:center }
 .hero-badge{display:inline-flex; gap:8px; align-items:center; font-size:14px; padding:6px 10px;
   border:1px solid var(--border); border-radius:999px; background: color-mix(in oklab, var(--surface) 92%, transparent)}
 .hero .cta{ margin-top:16px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap }
+
+/* ================= BUTTONS ================= */
 .btn{ display:inline-block; text-decoration:none; background:var(--grad); color:#fff;
-  padding:10px 14px; border-radius:12px; font-weight:700; box-shadow: 0 8px 18px rgba(95, 142, 240, .18) }
+  padding:10px 14px; border-radius:12px; font-weight:700; box-shadow:0 8px 18px rgba(95,142,240,.18) }
 .btn.ghost{ background:transparent; color:var(--text); border:1px solid var(--border) }
 
-/* ============ CARDS ============ */
+/* ================= CARDS ================= */
 .card{
   background: radial-gradient(1200px 200px at 0% 0%, color-mix(in oklab, var(--accent) 14%, transparent) 0, transparent 40%),
               radial-gradient(1200px 200px at 100% 100%, color-mix(in oklab, var(--accent2) 12%, transparent) 0, transparent 40%),
@@ -82,12 +81,12 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
   border-color: color-mix(in oklab, var(--accent) 40%, var(--border)) }
 .card p{ color:var(--muted); margin:6px 0 0 }
 
-/* ============ TABLES ============ */
+/* ================= TABLES ================= */
 .table{ width:100%; border-collapse:collapse; margin-top:14px }
 .table th, .table td{ border-bottom:1px solid var(--border); padding:10px; text-align:left }
 .table th{ color:var(--muted); font-weight:600 }
 
-/* ============ TIMELINE ============ */
+/* ================= TIMELINE ================= */
 .timeline{ position:relative; padding-left:20px; }
 .timeline::before{ content:""; position:absolute; top:0; bottom:0; left:8px; width:4px;
   background: color-mix(in oklab, var(--accent) 30%, var(--border)) }
@@ -101,12 +100,12 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 .progress-wrap{ margin-top:14px; background: color-mix(in oklab, var(--border) 80%, transparent); border-radius:999px; overflow:hidden; height:10px }
 .progress{ height:10px; width:0%; background: var(--grad); transition: width .8s ease }
 
-/* ============ UTILITIES ============ */
+/* ================= UTILITIES ================= */
 .muted{color:var(--muted)}
-.center{ text-align:center }
+.center{text-align:center}
 .badge{ font-size:12px; display:inline-block; padding:3px 8px; border-radius:999px; border:1px solid var(--border) }
 
-/* ============ BACK TO TOP ============ */
+/* ================= BACK TO TOP ================= */
 #toTop{
   position: fixed; right:18px; bottom:18px; z-index:1000; display:none;
   padding:10px 12px; border-radius:12px; background:var(--grad); color:#fff; border:0; cursor:pointer;
@@ -114,7 +113,7 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 }
 #toTop.show{ display:block }
 
-/* ============ REVEAL ANIM ============ */
+/* ================= REVEAL ================= */
 .reveal{ opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease }
 .reveal.in{ opacity:1; transform: translateY(0) }
 </style>
@@ -128,6 +127,7 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
     <nav id="nav">
       <a href="#home">Home</a>
+      <a href="#overview">Overview</a>
       <a href="#problem">Problem</a>
       <a href="#objectives">Objectives</a>
       <a href="#methodology">Methodology</a>
@@ -146,12 +146,31 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 
 <!-- ========== HERO ========== -->
 <section id="home" class="section container hero">
-  <div class="hero-badge reveal in"><span class="badge">Research</span> • AI for Maternal Wellness</div>
+  <div class="hero-badge reveal in"><span class="badge">Project ID: R25-017</span> • AI for Maternal Wellness</div>
   <h1 class="reveal">MamaWell – AI-Driven Maternal Wellness System</h1>
-  <p class="lead reveal">Report analysis, risk forecasting, and supportive guidance for healthier pregnancies.</p>
+  <p class="lead reveal">An integrated research platform that analyzes medical reports, forecasts risks, and provides trimester-aware guidance for healthier pregnancies.</p>
   <div class="cta reveal">
     <a class="btn" href="#modules">Explore Modules</a>
     <a class="btn ghost" href="#contact">Request a Demo</a>
+  </div>
+</section>
+
+<!-- ========== OVERVIEW ========== -->
+<section id="overview" class="section container">
+  <h2 class="reveal">Project Overview</h2>
+  <div class="grid grid-3">
+    <article class="card reveal">
+      <h3>Goal</h3>
+      <p>Deliver personalized, technology-driven support for pregnant mothers by combining data-driven risk insights, nutrition, exercise, and a supportive assistant.</p>
+    </article>
+    <article class="card reveal">
+      <h3>Why Now</h3>
+      <p>Risk detection is often delayed and guidance is generic. MamaWell unifies clinical indicators with tailored recommendations to support timely decisions.</p>
+    </article>
+    <article class="card reveal">
+      <h3>Scope</h3>
+      <p>Focus on trimester-wise report analysis, risk forecasting (e.g., GDM, anemia), meal planning, exercise recommendations, and an AI assistant.</p>
+    </article>
   </div>
 </section>
 
@@ -159,9 +178,9 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 <section id="problem" class="section container">
   <h2 class="reveal">Problem & Scope</h2>
   <div class="grid grid-3">
-    <article class="card reveal"><h3>Context</h3><p>Early identification of risks (e.g., GDM, anemia) is critical, yet mothers often lack proactive tools.</p></article>
-    <article class="card reveal"><h3>Gap</h3><p>Few integrated, locally validated solutions combine report analysis with personalized insights.</p></article>
-    <article class="card reveal"><h3>Solution</h3><p>MamaWell analyzes trimester-wise reports, predicts risk, and offers tailored guidance with an assistant.</p></article>
+    <article class="card reveal"><h3>Challenges</h3><p>Delayed detection of risks; fragmented information across records; limited access to personalized guidance—especially beyond urban centers.</p></article>
+    <article class="card reveal"><h3>Gap</h3><p>Most apps offer general tips, not data-backed, trimester-specific insights tied to clinical measures like BMI, BP, Hb, or glucose trends.</p></article>
+    <article class="card reveal"><h3>Approach</h3><p>MamaWell analyzes uploaded reports, forecasts risk levels, and offers nutrition & exercise plans with a 24/7 support assistant.</p></article>
   </div>
 </section>
 
@@ -169,10 +188,11 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 <section id="objectives" class="section container">
   <h2 class="reveal">Objectives</h2>
   <div class="grid grid-2">
-    <article class="card reveal"><h3>O1</h3><p>Automate trimester-wise medical report analysis.</p></article>
-    <article class="card reveal"><h3>O2</h3><p>Predict gestational diabetes & anemia with ML ensembles.</p></article>
-    <article class="card reveal"><h3>O3</h3><p>Deploy a 24/7 pregnancy support assistant.</p></article>
-    <article class="card reveal"><h3>O4</h3><p>Provide a dashboard for longitudinal risk tracking.</p></article>
+    <article class="card reveal"><h3>Main Objective</h3><p>Provide a comprehensive, personalized maternal-wellness experience through AI-assisted analysis and recommendations.</p></article>
+    <article class="card reveal"><h3>O1 – Report Analysis</h3><p>Automate trimester-wise extraction and interpretation of key biomarkers from medical reports.</p></article>
+    <article class="card reveal"><h3>O2 – Risk Forecasting</h3><p>Predict conditions such as gestational diabetes and anemia using robust ML ensembles.</p></article>
+    <article class="card reveal"><h3>O3 – Support Assist</h3><p>Offer an always-available assistant that answers common questions and supports record-keeping.</p></article>
+    <article class="card reveal"><h3>O4 – Lifestyle Guidance</h3><p>Generate personalized meal plans and safe, trimester-aware exercise recommendations.</p></article>
   </div>
 </section>
 
@@ -183,17 +203,17 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
     <article class="card reveal">
       <h3>Data Pipeline</h3>
       <ul>
-        <li>Collection → Cleaning → Split</li>
-        <li>Feature Engineering & Normalization</li>
-        <li>Ethical handling (consent, anonymization)</li>
+        <li>Collect → Clean → Split (trimester-wise records and supportive datasets)</li>
+        <li>Feature engineering (BMI bands, risk indicators) & normalization</li>
+        <li>Ethics: consent, anonymization, and secure handling</li>
       </ul>
     </article>
     <article class="card reveal">
       <h3>Modeling & Evaluation</h3>
       <ul>
-        <li>Baselines → Ensembles (e.g., GBM)</li>
-        <li>Cross-validation, F1/ROC-AUC</li>
-        <li>Error analysis & bias checks</li>
+        <li>Baseline models → boosted ensembles (e.g., gradient boosting)</li>
+        <li>Cross-validation; metrics such as F1 and ROC-AUC</li>
+        <li>Error analysis and bias checks; iterative refinement</li>
       </ul>
     </article>
   </div>
@@ -203,12 +223,12 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 <section id="modules" class="section container">
   <h2 class="reveal">System Modules</h2>
   <div class="grid grid-3">
-    <article class="card reveal"><h3>Medical Report Analyzer</h3><p>Extracts key biomarkers and trends by trimester.</p></article>
-    <article class="card reveal"><h3>Risk Prediction Engine</h3><p>Flags potential risks (GDM, anemia) early.</p></article>
-    <article class="card reveal"><h3>Support Assistant</h3><p>Answers questions and provides guidance 24/7.</p></article>
-    <article class="card reveal"><h3>Personalized Meal Plan</h3><p>Plans aligned to risk level and preferences.</p></article>
-    <article class="card reveal"><h3>Exercise Recommender</h3><p>Safe, trimester-aware routines and tips.</p></article>
-    <article class="card reveal"><h3>Dashboard & Alerts</h3><p>Visualize progress; receive proactive alerts.</p></article>
+    <article class="card reveal"><h3>Pregnancy Risk Forecasting</h3><p>Integrates patient records (BMI, BP, Hb, glucose trends) to flag elevated risk levels early.</p></article>
+    <article class="card reveal"><h3>Pregnancy Support Assist</h3><p>AI assistant (text/voice ready) for FAQs, education, and guided self-tracking.</p></article>
+    <article class="card reveal"><h3>Personalized Meal Planning</h3><p>Trimester-specific plans aligned to risk category, preferences, and nutritional goals.</p></article>
+    <article class="card reveal"><h3>Risk-Aware Exercise</h3><p>Safe, trimester-aware exercise suggestions tailored to health indicators.</p></article>
+    <article class="card reveal"><h3>Dashboard & Alerts</h3><p>Longitudinal visualization, progress insights, and proactive notifications.</p></article>
+    <article class="card reveal"><h3>Integration</h3><p>Modular architecture for mobile/clinic interfaces and future clinical validation.</p></article>
   </div>
 </section>
 
@@ -227,11 +247,15 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 
 <!-- ========== TEAM ========== -->
 <section id="team" class="section container">
-  <h2 class="reveal">Team</h2>
+  <h2 class="reveal">Team & Supervisors</h2>
   <div class="grid grid-3">
-    <article class="card reveal"><h3>Ms. Uthpala Samarakkon</h3><p class="muted">Supervisor • SLIIT</p></article>
-    <!-- <article class="card reveal"><h3>Dr. Jayantha Amarasinghe</h3><p class="muted">Co-Supervisor • SLIIT</p></article> -->
-    <article class="card reveal"><h3>Adithya Ranawaka</h3><p class="muted">Undergraduate Researcher • SLIIT</p></article>
+    <article class="card reveal"><h3>Ms. Uthpala Samarakoon</h3><p class="muted">Supervisor • SLIIT</p></article>
+    <article class="card reveal"><h3>Ms. Wishalya Tissera</h3><p class="muted">Co-Supervisor • SLIIT</p></article>
+    <article class="card reveal"><h3>Dr. Pasan Jayasinghe</h3><p class="muted">External Supervisor</p></article>
+    <article class="card reveal"><h3>Shashika Dinuwan</h3><p class="muted">Pregnancy Risk Forecasting & Records • IT21806872</p></article>
+    <article class="card reveal"><h3>Ranawaka T.A</h3><p class="muted">Pregnancy Support Assist • IT21808098</p></article>
+    <article class="card reveal"><h3>Dahanayake Y.D.N.P</h3><p class="muted">Personalized Meal Planning • IT21310096</p></article>
+    <article class="card reveal"><h3>Jayalath U.W.T.P</h3><p class="muted">Risk & Exercise Recommendation • IT21811036</p></article>
   </div>
 </section>
 
@@ -241,7 +265,7 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
   <table class="table reveal">
     <thead><tr><th>Year</th><th>Title</th><th>Venue</th></tr></thead>
     <tbody>
-      <tr><td>2025</td><td>AI-Driven Pregnancy Health Monitoring</td><td> 2025 </td></tr>
+      <tr><td>2025</td><td>AI-Driven Pregnancy Health Monitoring</td><td>ICECET 2025 (Paris)</td></tr>
     </tbody>
   </table>
 </section>
@@ -250,8 +274,8 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 <section id="downloads" class="section container">
   <h2 class="reveal">Downloads</h2>
   <div class="grid grid-2">
-    <article class="card reveal"><h3>Final Report (PDF)</h3><p>Comprehensive documentation.</p><a class="btn" href="#">Download</a></article>
-    <article class="card reveal"><h3>Slides (PPT/PDF)</h3><p>Presentation deck.</p><a class="btn" href="#">Download</a></article>
+    <article class="card reveal"><h3>Project Report</h3><p>Full academic write-up (PDF).</p><a class="btn" href="#">Download</a></article>
+    <article class="card reveal"><h3>Slides</h3><p>Final presentation deck (PPT/PDF).</p><a class="btn" href="#">Download</a></article>
   </div>
 </section>
 
@@ -261,7 +285,7 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
   <div class="grid grid-2">
     <article class="card reveal">
       <h3>Get in Touch</h3>
-      <p class="muted">We’d love to hear from you for collaborations, pilots, or feedback.</p>
+      <p class="muted">For collaborations, pilots, or academic feedback, send us a message. We’ll reply shortly.</p>
       <form id="contactForm" action="YOUR_FORMSPREE_ENDPOINT_HERE" method="POST" novalidate>
         <div style="display:grid;gap:10px;margin-top:10px">
           <input name="name" type="text" placeholder="Your name" required
@@ -270,9 +294,7 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
                  style="padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text)">
           <textarea name="message" rows="5" placeholder="Your message" required
                  style="padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text)"></textarea>
-          <!-- OPTIONAL: custom subject -->
           <input type="hidden" name="_subject" value="MamaWell Website Contact" />
-          <!-- OPTIONAL: honeypot anti-bot -->
           <input type="text" name="_honey" style="display:none">
           <button class="btn" type="submit">Send Message</button>
           <small class="muted" id="formNote">We’ll reply to your email soon.</small>
@@ -283,7 +305,7 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 
     <article class="card reveal">
       <h3>Details</h3>
-      <p>Email: <a href="mailto:it21806872@my.sliit.lk">adithya@gmail.com</a></p>
+      <p>Email: <a href="mailto:it21806872@my.sliit.lk">it21806872@my.sliit.lk</a></p>
       <p>Faculty of Computing, SLIIT, Malabe, Sri Lanka.</p>
       <p><span class="badge">Availability</span> Mon–Fri, 9:00–17:00 (IST)</p>
     </article>
@@ -293,7 +315,7 @@ nav a.active{ outline:1px solid var(--border); background:var(--card) }
 </main>
 
 <footer class="center" style="border-top:1px solid var(--border); padding:28px 0; color:var(--muted)">
-  © 2025 MamaWell – AI-Driven Maternal Wellness System
+  © 2025 MamaWell (R25-017) – AI-Driven Maternal Wellness System
 </footer>
 
 <!-- Back to top -->
@@ -314,12 +336,12 @@ themeToggle?.addEventListener('click', ()=>{
   localStorage.setItem('theme', next);
 });
 
-/* ======= SMOOTH ANCHOR (native CSS handles, but collapse mobile menu) ======= */
+/* ======= collapse mobile menu on anchor click ======= */
 nav.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click', ()=> nav.classList.remove('open'));
 });
 
-/* ======= SCROLL SPY (active section highlight) ======= */
+/* ======= SCROLL SPY (active link) ======= */
 const links = [...nav.querySelectorAll('a[href^="#"]')];
 const map = new Map(links.map(a=>[document.querySelector(a.getAttribute('href')), a]));
 const spy = new IntersectionObserver(entries=>{
