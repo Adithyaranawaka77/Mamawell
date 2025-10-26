@@ -7,6 +7,35 @@
 <link rel="icon" href="favicon.ico" />
 
 <style>
+  .profile {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.profile:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(94,234,212,0.4);
+}
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+.social-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 18px;
+  transition: color .2s ease;
+}
+.social-links a:hover {
+  color: var(--accent2);
+}
+
 /* ================= THEME ================= */
 :root{
   --bg:#0b0c10; --surface:#111320; --card:#161826; --text:#e6e6e6; --muted:#a8a8b3;
@@ -371,18 +400,85 @@ nav a.active {
 <section id="team" class="section container">
   <h2 class="reveal">Team & Supervisors</h2>
   <div class="prose reveal">
-    <p>Our multidisciplinary team blends data, UX, and domain input to keep MomFit both practical and clinically respectful. Supervisory guidance ensures rigor in method and ethics.</p>
+    <p>Our multidisciplinary team brings together technology, health awareness, and research insight to make MomFit a reliable and practical wellness solution. Supervisory guidance ensures that our methods remain ethical, data-driven, and impactful for real-world use.</p>
   </div>
   <div class="grid grid-3">
-    <article class="card reveal"><h3>Ms. Uthpala Samarakoon</h3><p class="muted">Supervisor • SLIIT</p></article>
-    <article class="card reveal"><h3>Ms. Wishalya Tissera</h3><p class="muted">Co-Supervisor • SLIIT</p></article>
-    <article class="card reveal"><h3>Dr. Pasan Jayasinghe</h3><p class="muted">External Supervisor</p></article>
-    <article class="card reveal"><h3>Shashika Dinuwan</h3><p class="muted">Pregnancy Risk Forecasting & Records • IT21806872</p></article>
-    <article class="card reveal"><h3>Ranawaka T.A</h3><p class="muted">Pregnancy Support Assist • IT21808098</p></article>
-    <article class="card reveal"><h3>Dahanayake Y.D.N.P</h3><p class="muted">Personalized Meal Planning • IT21310096</p></article>
-    <article class="card reveal"><h3>Jayalath U.W.T.P</h3><p class="muted">Risk & Exercise Recommendation • IT21811036</p></article>
+
+    <!-- Supervisors -->
+    <article class="card reveal center">
+      <img src="images/uthpala.jpg" alt="Ms. Uthpala Samarakoon" class="profile">
+      <h3>Ms. Uthpala Samarakoon</h3>
+      <p class="muted">Supervisor • SLIIT</p>
+      <div class="social-links">
+        <a href="mailto:uthpala.samarakoon@sliit.lk">✉️</a>
+        <a href="https://www.linkedin.com/in/uthpala-samarakoon/" target="_blank">🔗</a>
+      </div>
+    </article>
+
+    <article class="card reveal center">
+      <img src="images/wishalya.jpg" alt="Ms. Wishalya Tissera" class="profile">
+      <h3>Ms. Wishalya Tissera</h3>
+      <p class="muted">Co-Supervisor • SLIIT</p>
+      <div class="social-links">
+        <a href="mailto:wishalya.tissera@sliit.lk">✉️</a>
+        <a href="https://www.linkedin.com/in/wishalya-tissera/" target="_blank">🔗</a>
+      </div>
+    </article>
+
+    <article class="card reveal center">
+      <img src="images/pasan.jpg" alt="Dr. Pasan Jayasinghe" class="profile">
+      <h3>Dr. Pasan Jayasinghe</h3>
+      <p class="muted">External Supervisor</p>
+      <div class="social-links">
+        <a href="mailto:pasan.jayasinghe@gmail.com">✉️</a>
+        <a href="https://www.linkedin.com/in/pasan-jayasinghe/" target="_blank">🔗</a>
+      </div>
+    </article>
+
+    <!-- Team Members -->
+    <article class="card reveal center">
+      <img src="images/shashika.jpg" alt="Shashika Dinuwan" class="profile">
+      <h3>Shashika Dinuwan</h3>
+      <p class="muted">Pregnancy Risk Forecasting & Records • IT21806872</p>
+      <div class="social-links">
+        <a href="mailto:it21806872@my.sliit.lk">✉️</a>
+        <a href="https://www.linkedin.com/in/shashika-dinuwan/" target="_blank">🔗</a>
+      </div>
+    </article>
+
+    <article class="card reveal center">
+      <img src="images/ranawaka.jpg" alt="Ranawaka T.A" class="profile">
+      <h3>Ranawaka T.A</h3>
+      <p class="muted">Pregnancy Support Assist • IT21808098</p>
+      <div class="social-links">
+        <a href="mailto:it21808098@my.sliit.lk">✉️</a>
+        <a href="https://www.linkedin.com/in/ranawaka-ta/" target="_blank">🔗</a>
+      </div>
+    </article>
+
+    <article class="card reveal center">
+      <img src="images/dahanayake.jpg" alt="Dahanayake Y.D.N.P" class="profile">
+      <h3>Dahanayake Y.D.N.P</h3>
+      <p class="muted">Personalized Meal Planning • IT21310096</p>
+      <div class="social-links">
+        <a href="mailto:it21310096@my.sliit.lk">✉️</a>
+        <a href="https://www.linkedin.com/in/dahanayake-ydnp/" target="_blank">🔗</a>
+      </div>
+    </article>
+
+    <article class="card reveal center">
+      <img src="images/jayalath.jpg" alt="Jayalath U.W.T.P" class="profile">
+      <h3>Jayalath U.W.T.P</h3>
+      <p class="muted">Risk & Exercise Recommendation • IT21811036</p>
+      <div class="social-links">
+        <a href="mailto:it21811036@my.sliit.lk">✉️</a>
+        <a href="https://www.linkedin.com/in/jayalath-uwtp/" target="_blank">🔗</a>
+      </div>
+    </article>
+
   </div>
 </section>
+
 
 <!-- ========== PUBLICATIONS ========== -->
 <section id="publications" class="section container">
